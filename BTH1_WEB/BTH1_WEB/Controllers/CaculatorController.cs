@@ -7,19 +7,20 @@ using BTH1_WEB.Models;
 
 namespace BTH1_WEB.Controllers
 {
-    public class HomeController : Controller
+    public class CaculatorController : Controller
     {
+        // GET: Caculator
         public ActionResult Index(Expression model)
         {
             return View(model);
         }
-        [HttpPost]
-        public ActionResult Index(Expression model, string command)
+
+        public ActionResult Calculate(Expression model)
         {
             // kiểm chứng
             if (ModelState.IsValid)
             {
-                switch (command)
+                switch (model.Operator)
                 {
                     case "+": model.Result = model.Number1 + model.Number2; break;
                     case "-": model.Result = model.Number1 - model.Number2; break;
@@ -35,23 +36,8 @@ namespace BTH1_WEB.Controllers
                         break;
                 }
                 //return View();
-                //return RedirectToAction("Index", model);
             }
-            return View(model);
-
-        }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index", model);
         }
     }
 }
