@@ -24,7 +24,22 @@
         @Html.TextBoxFor(m => m.Number2, new { @class = "form-control" })
     </div>
     <div class="form-group list-inline mb-2 mr-sm-2">
-        @Html.TextBoxFor(m => m.Result, new { @class = "form-control mb-2 mr-sm-2", @readonly = "readonly" })
+        =
+    </div>
+    <div class="form-group list-inline mb-2 mr-sm-2">
+        @if (Model.Error == "")
+        {
+            <span>
+                @Html.TextBox(Model.Result.ToString(), String.Format("{0:0.##}", Model.Result), new { @class = "form-control mb-2 mr-sm-2", @readonly = "readonly" })
+            </span>
+        }
+        else
+        {
+            <span>
+                @Html.TextBoxFor(m => m.Error , new { @class = "form-control mb-2 mr-sm-2", @readonly = "readonly" })
+            </span>
+        }
+
     </div>
     <div class="form-group list-inline">
         <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Tính</button>
